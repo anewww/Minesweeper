@@ -458,107 +458,8 @@ function withinField(i, j) {
     return 0 <= i && i < fieldWidth && 0 <= j && j < fieldHeight;
 }
 
-function solvingAlgorithm() {
-/*     let moveIsExist = true;
-    while (moveIsExist) {
-        let moveIsExist = false;
-        for (let cell of game.opened) {
-            if (cell.status === 'num') {
-                let unrevealedCells = 0;
-                for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                    const nextI = cell.ind + di;
-                    const nextJ = cell.jnd + dj;
-                    if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false) {
-                        unrevealedCells++;
-                    }
-                }
-                if (unrevealedCells === cell.NearMines) {
-                    moveIsExist = true;
-                    for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                        const nextI = cell.ind + di;
-                        const nextJ = cell.jnd + dj;
-                        if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false) {
-                            game.cells[nextI][nextJ].markMine();
-                        }
-                    }
-                }
-            }
-        }
-        for (let cell of game.opened) {
-            if (cell.status === 'num') {
-                let markedCells = 0;
-                for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                    const nextI = cell.ind + di;
-                    const nextJ = cell.jnd + dj;
-                    if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false && game.cells[nextI][nextJ].isMarked === true) {
-                        markedCells++;
-                    }
-                }
-                if (markedCells === cell.NearMines) {
-                    moveIsExist = true;
-                    for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                        const nextI = cell.ind + di;
-                        const nextJ = cell.jnd + dj;
-                        if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false && game.cells[nextI][nextJ].isMarked === false) {
-                            depthFirstSearch(nextI, nextJ);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    console.log('Yeah!');
-    return; */
-    let moveIsExist = false;
-    for (let cell of game.opened) {
-        if (cell.status === 'num') {
-            let unrevealedCells = 0;
-            for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                const nextI = cell.ind + di;
-                const nextJ = cell.jnd + dj;
-                if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false) {
-                    unrevealedCells++;
-                }
-            }
-            if (unrevealedCells === cell.NearMines) {
-                moveIsExist = true;
-                for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                    const nextI = cell.ind + di;
-                    const nextJ = cell.jnd + dj;
-                    if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false) {
-                        game.cells[nextI][nextJ].markMine();
-                    }
-                }
-            }
-        }
-    }
-    for (let cell of game.opened) {
-        if (cell.status === 'num') {
-            let markedCells = 0;
-            for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                const nextI = cell.ind + di;
-                const nextJ = cell.jnd + dj;
-                if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false && game.cells[nextI][nextJ].isMarked === true) {
-                    markedCells++;
-                }
-            }
-            if (markedCells === cell.NearMines) {
-                moveIsExist = true;
-                for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                    const nextI = cell.ind + di;
-                    const nextJ = cell.jnd + dj;
-                    if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false && game.cells[nextI][nextJ].isMarked === false) {
-                        depthFirstSearch(nextI, nextJ);
-                    }
-                }
-            }
-        }
-    }
-    return moveIsExist;
-}
-
 //open a cell
-let isFirst = false; ///
+let isFirst = false;
 game.canvas.addEventListener('click', clickHandler);
 function clickHandler(e) {
     if (isFirst) {
@@ -577,33 +478,6 @@ function clickHandler(e) {
                 }
             }
         }
-        function generateLogicalField(i, j) {
-            depthFirstSearch(i, j);
-/*             let i = 0;
-            let intervalID = setInterval(() => {
-                solvingAlgorithm();
-                if (i++ === 20) clearInterval(intervalID);
-            }, 0); */
-            while (solvingAlgorithm()) solvingAlgorithm();
-            // if (!isWon()) {
-            //     newGame();   
-            //     generateLogicalField();
-            // }
-        }
-        console.log(isWon());
-        while (!isWon()) {
-            newGame();
-            generateLogicalField(ind, jnd);
-        }
-        //generateLogicalField();
-/*         for (let row of game.cells) {
-            for (let cell of row) {
-                if (cell.isOpened) {
-                    cell.isOpened = false;
-                    cell.draw();
-                }
-            }
-        } */
     }
     else {
         top:
@@ -615,19 +489,6 @@ function clickHandler(e) {
                     depthFirstSearch(i, j);
                     break top;
                 }
-/*                 else if (game.cells[i][j].isOpened && ((e.offsetX >= game.cells[i][j].coords.x && e.offsetX <= (game.cells[i][j].coords.x + cellSize)) && 
-                (e.offsetY >= game.cells[i][j].coords.y && e.offsetY <= (game.cells[i][j].coords.y + cellSize)))) {
-                    for (let [di, dj] of [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]) {
-                        const nextI = i + di;
-                        const nextJ = j + dj;
-                        if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false && game.cells[nextI][nextJ].isMarked === false && game.cells[nextI][nextJ].status === 'mt') {
-                            game.cells[i][j].open();
-                        }
-                        else if (withinField(nextI, nextJ) && game.cells[nextI][nextJ].isOpened === false && game.cells[nextI][nextJ].isMarked === false && game.cells[nextI][nextJ].status === 'num' && game.cells[i][j].status !== 'num') {
-                            game.cells[nextI][nextJ].open();
-                        }
-                    }
-                } */
             }
         }
     }
@@ -862,7 +723,7 @@ function mediaQueries() {
     }
     if (mediaQueryMedium.matches) {
         cellSize = 20;
-    }                                  5
+    }
     if (mediaQueryLarge.matches) {
         cellSize = 24;
     }
