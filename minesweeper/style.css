@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #cdcdcd;
+/*     background-image: url(bg.jpg); */
+}
+
+.heading {
+    font-size: 50px;
+    color: #39373f;
+    text-align: center;
+    margin: 1% auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#won {
+    color: #008000;
+    display: none;
+}
+
+#lose {
+    color: red;
+    display: none;
+}
+
+#canvas {
+    display: block;
+/*     width: 50%;
+    height: 80%; */
+    margin: 2% auto;
+}
+
+#undo {
+    position: absolute;
+    top: 20%;
+    left: 75%;
+}
+
+#new-game {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+}
+
+#restart {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}
+
+#reveal {
+    position: absolute;
+    top: 55%;
+    left: 75%;
+}
+
+#game-type {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+}
+
+form #inputWidth {
+    position: absolute;
+}
+
+form #inputHeight {
+    position: absolute;
+}
+
+form #inputMines {
+    position: absolute;
+}
+
+input {
+    text-align: center;
+}
